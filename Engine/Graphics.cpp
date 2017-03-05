@@ -316,6 +316,31 @@ void Graphics::PutPixel( int x,int y,Color c )
 	pSysBuffer[Graphics::ScreenWidth * y + x] = c;
 }
 
+void Graphics::DrawRect(int x0, int y0, int x1, int y1, Color c)
+{
+	if (x0 > x1)
+	{
+		std::swap(x0, x1);
+	}
+	if (y0 > y1)
+	{
+		std::swap(y0, y1);
+	}
+
+	for (int i = y0; i < y1; i++)
+	{
+		for (int j = x0; j < x1; j++)
+		{
+			PutPixel(j, i, c);
+		}
+	}
+}
+
+void Graphics::DrawRectDim(int x, int y, int width, int height, Color c)
+{
+	DrawRect(x, y, x + width, y + height, c);
+}
+
 void Graphics::DrawCircle(int x, int y, int radius, Color c)
 {
 	const int sqRadius = radius * radius;
